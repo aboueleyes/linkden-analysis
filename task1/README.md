@@ -7,7 +7,6 @@ Search Keyword) and get the following feature for each Job:
 - Company Name
 - Location
 - Date and Time
-- Salary
 - Full time or Part Time
 - Seniority Level
 - Sector or Industry, Example: Information Technology
