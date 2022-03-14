@@ -29,6 +29,6 @@ in the task1 folder make directory with your name inside it
 
 ## Resources
 
-** please add any resources here **
+**please add any resources here**
 ### Data Cleaning
 - use `dataparser` to clean the data while scraping
