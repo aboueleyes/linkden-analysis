@@ -31,4 +31,4 @@ in the task1 folder make directory with your name inside it
 
 **please add any resources here**
 ### Data Cleaning
-- use `dataparser` to clean the data while scraping
+- use [`dateparser`](https://dateparser.readthedocs.io/en/latest/) to clean the data while scraping
