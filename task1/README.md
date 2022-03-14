@@ -1,5 +1,8 @@
 # LinkedIn Scraper
 
+*Deadline Monday 21st March*
+
+
 The scraper is supposed to loop through all job posts on LinkedIn (Where Egypt is
 Search Keyword) and get the following feature for each Job:
 
@@ -23,3 +26,9 @@ in the task1 folder make directory with your name inside it
 - sample-data.csv <- sample data 500 jobs for example
 - requiremnts.txt <- external library you used
 ```
+
+## Resources
+
+** please add any resources here **
+### Data Cleaning
+- use `dataparser` to clean the data while scraping
