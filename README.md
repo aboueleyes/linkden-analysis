@@ -30,6 +30,7 @@ code .
 - To open with jupyter notebook (or maually open using jupyter notebook app)
 ```
 jupyter notebook
+```
 
 
 ## Resources
