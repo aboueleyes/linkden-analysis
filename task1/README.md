@@ -30,5 +30,13 @@ in the task1 folder make directory with your name inside it
 ## Resources
 
 **please add any resources here**
+### Data Scraping 
+
+Please read the docs when learning these modules, you can watch these videos for a headstart! 
+
+- [Basics of Requests and Beautifulsoup](https://www.youtube.com/watch?v=ng2o98k983k)
+- [More Beutifulsoup Tutorials](https://www.youtube.com/playlist?list=PLzMcBGfZo4-lSq2IDrA6vpZEV92AmQfJK)
+- [Selenium!](https://www.youtube.com/watch?v=Xjv1sY630Uc&list=PLzMcBGfZo4-n40rB1XaJ0ak1bemvlqumQ)
+
 ### Data Cleaning
 - use [`dateparser`](https://dateparser.readthedocs.io/en/latest/) to clean the data while scraping
