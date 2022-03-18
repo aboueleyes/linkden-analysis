@@ -16,12 +16,12 @@ Open the Command line or Terminal
 - Clone the repository
 
 ```
-git clone https://github.com/OmdenaAI/omdena-egypt-arabic-content-translator.git
+git clone git@github.com:aboueleyes/linkden-analysis.git
 ```
 - Move to the folder
 
 ```
-cd omdena-egypt-arabic-content-translator
+cd linkden-analysis/
 ```
 - To open with VSCode
 ```
