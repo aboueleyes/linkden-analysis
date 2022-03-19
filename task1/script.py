@@ -30,9 +30,6 @@ def writeout(data):
     with open("out", "r+") as f:
         f.write(data)
 
-
-
-
 def parse_job_data(data: dict) -> dict:
     try:
         job_title = data["title"]
