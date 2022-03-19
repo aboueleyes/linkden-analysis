@@ -54,20 +54,30 @@ def parse_job_data(data: dict) -> dict:
     except:
         pass
 
-jobs = []
-def scrape_page(chunk: int) -> None:
-    for job_data in get_jobs_data(chunk)["included"]:
-        jobs.append(parse_job_data(job_data))
-
-def write_csv(data: dict) -> None:
+def scrape_page(chunk: int) -> list:
+    jobs = []
     try:
-        with open("out.csv", "w", newline="") as f:
+        for job_data in get_jobs_data(chunk)["included"]:
+            jobs.append(parse_job_data(job_data))
+        return jobs
+    except:
+        pass
+
+def write_csv_headers() ->None:
+    with open("out.csv", "w") as f:
+        title = "Title,Location,ID,Remote,Listing Date,Company ID".split(",")
+        cw = csv.DictWriter(f, fieldnames=title)
+        cw.writeheader()
+
+def write_csv(data: list) -> None:
+    try:
+        with open("out.csv", "a", newline="") as f:
             title = "Title,Location,ID,Remote,Listing Date,Company ID".split(",")
-            cw = csv.DictWriter(f, fieldnames=title)
-            cw.writeheader()
+            cw = csv.DictWriter(f, title)
             cw.writerows(data)
     except:
         pass
 
-scrape_page(0)
-write_csv(jobs)
+write_csv_headers()
+for i in range(0,10000,25):
+    write_csv(scrape_page(i))
