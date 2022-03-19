@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import csv
+import time
 import requests
 from bs4 import BeautifulSoup
 import browser_cookie3
@@ -9,19 +11,13 @@ cookiejar = browser_cookie3.chrome()
 url_jobsearch = "https://www.linkedin.com/jobs/search/?start="
 
 r = requests.get(url_jobsearch, cookies=cookiejar)
-def get_jobs_links(chunk) -> list:
-    r = requests.get(f"https://www.linkedin.com/jobs/search/?start={chunk}", cookies=cookiejar)
-    regex = "fs_normalized_jobPosting:[0-9]{10}"
-    job_ids_raw = re.findall(regex, r.text)
-    job_ids = [f"https://www.linkedin.com/jobs/view/{item.split(':')[1]}" for item in set(job_ids_raw)]
-    return job_ids
 
-def get_jobs_links_new(chunk) -> list:
+def get_jobs_data(chunk: int) -> dict:
     r = requests.get(f"https://www.linkedin.com/jobs/search/?start={chunk}", cookies=cookiejar)
     soup = BeautifulSoup(r.text, "lxml")
     raw = soup.find_all("code", {"id" : re.compile('bpr-guid-*')})
     json_data = json.loads(raw[-2].text)
-    print(type(json_data))
+    return json_data
 
 def get_job_info(link: str) -> list:
     r = requests.get(link, cookies=cookiejar)
@@ -36,6 +32,42 @@ def writeout(data):
 
 
 
-#get_job_info("https://www.linkedin.com/jobs/view/2947388512")
 
-get_jobs_links_new(100)
+def parse_job_data(data: dict) -> dict:
+    try:
+        job_title = data["title"]
+        job_location = data["formattedLocation"]
+        job_id = data["jobPostingId"]
+        job_remote = data["workRemoteAllowed"]
+        job_listing_date_epoch = int(str(data["listedAt"])[:10])
+        job_listing_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(job_listing_date_epoch))
+        job_company_id = data["companyDetails"]["company"].split("company:")[1]
+        cleaned_data = {
+            "Title" : job_title,
+            "Location" : job_location,
+            "ID" : job_id,
+            "Remote" : job_remote,
+            "Listing Date" : job_listing_time,
+            "Company ID" : job_company_id
+        }
+        return cleaned_data
+    except:
+        pass
+
+jobs = []
+def scrape_page(chunk: int) -> None:
+    for job_data in get_jobs_data(chunk)["included"]:
+        jobs.append(parse_job_data(job_data))
+
+def write_csv(data: dict) -> None:
+    try:
+        with open("out.csv", "w", newline="") as f:
+            title = "Title,Location,ID,Remote,Listing Date,Company ID".split(",")
+            cw = csv.DictWriter(f, fieldnames=title)
+            cw.writeheader()
+            cw.writerows(data)
+    except:
+        pass
+
+scrape_page(0)
+write_csv(jobs)
