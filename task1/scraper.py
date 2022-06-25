@@ -16,7 +16,7 @@ driver = webdriver.Chrome("chromedriver.exe")
 def  login():
  
  email = 'mostaf7583@gmail.com'
- passwors = '~E%pbP8@sF$@jR:'
+ passwors = ''
  url = "https://linkedin.com"
  time.sleep(5)
  driver.get(url)
